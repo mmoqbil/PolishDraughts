@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Polish-Draughts")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("PolishDraughts")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("Polish-Draughts")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Polish-Draughts")]
+[assembly: System.Reflection.AssemblyProductAttribute("PolishDraughts")]
+[assembly: System.Reflection.AssemblyTitleAttribute("PolishDraughts")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Wygenerowane przez klasę WriteCodeFragment programu MSBuild.
