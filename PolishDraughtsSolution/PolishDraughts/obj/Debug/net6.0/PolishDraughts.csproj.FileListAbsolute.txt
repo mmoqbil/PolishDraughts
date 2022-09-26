@@ -1,0 +1,15 @@
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\bin\Debug\net6.0\PolishDraughts.exe
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\bin\Debug\net6.0\PolishDraughts.deps.json
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\bin\Debug\net6.0\PolishDraughts.runtimeconfig.json
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\bin\Debug\net6.0\PolishDraughts.dll
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\bin\Debug\net6.0\PolishDraughts.pdb
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\PolishDraughts.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\PolishDraughts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\PolishDraughts.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\PolishDraughts.AssemblyInfo.cs
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\PolishDraughts.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\PolishDraughts.dll
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\refint\PolishDraughts.dll
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\PolishDraughts.pdb
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\PolishDraughts.genruntimeconfig.cache
+C:\Users\user\Desktop\C#\Daugthers\polish-draughts-csharp-mmoqbil\PolishDraughtsSolution\PolishDraughts\obj\Debug\net6.0\ref\PolishDraughts.dll
