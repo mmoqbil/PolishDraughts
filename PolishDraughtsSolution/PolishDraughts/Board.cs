@@ -3,40 +3,30 @@
 public class Board
 {
     public int Size { get; set; }
-    public enum pos_x
-    {
-        A = 0,
-        B = 1,
-        C = 2,
-        D = 3,
-        E = 4,
-        F = 5,
-        G = 6,
-        H = 7,
-        I = 8,
-        J = 9,
-        K = 10,
-        L = 11,
-        M = 12,
-        N = 13,
-        O = 14,
-        P = 15,
-        Q = 16,
-        R = 17,
-        S = 18,
-        T = 19,
-    }
+    public Dictionary<string, (int,int)> stringPosition = new Dictionary<string, (int,int)>();
+    public string allAvailablePositions = "ABCDEFGHIJKLMNOPRST";
 
     public string[,] CreateBoard(int BoardSize)
     {
         string[,] Board = new string[BoardSize, BoardSize];
         return Board;
     }
-    public void ToString(string position)
+    public (int,int) ToString(string position, int size)
     {
-        char firstPos = position[0];
-        pos_x color = (pos_x)System.Enum.Parse(typeof(pos_x),"A" );
-        Console.WriteLine(color);
+        for (int row = 0;row < size;row++)
+        {
+            for (int column = 0;column<size;column++)
+            {
+                string firstLetter = allAvailablePositions[column].ToString();
+                stringPosition.Add(firstLetter + (row+1).ToString(),(column,row));
+            }
+        }
+        foreach (KeyValuePair<string, (int, int)> entry in stringPosition)
+        {
+            Console.Write(entry.Key);
+            Console.Write(entry.Value);
+        }
+        return stringPosition[position];
     }
 }
 

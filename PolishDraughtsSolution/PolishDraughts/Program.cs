@@ -86,3 +86,5 @@ for (int row = 0; row < BoardSize; row++)
         }
     }
 }
+
+Console.WriteLine(board.ToString("A2", board.Size));
