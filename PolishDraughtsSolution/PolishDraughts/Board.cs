@@ -34,9 +34,11 @@ public class Board
     }
     public void ToString(string position)
     {
+        
+        int x_pos = 0;
         foreach (var val in Enum.GetValues(typeof(pos_x)))
         {
-            Console.WriteLine(val);
+        
         }
     }
 }
