@@ -9,5 +9,11 @@ public class Board
         string[,] Board = new string[BoardSize, BoardSize];
         return Board;
     }
+
+    public string[] DisplayBoard(int BoardSize)
+    {
+        string[] Board = new string[BoardSize];
+        return Board;
+    }
 }
 

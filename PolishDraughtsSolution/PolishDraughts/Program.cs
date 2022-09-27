@@ -1,49 +1,59 @@
-﻿//using PolishDraughts;
+﻿using PolishDraughts;
 Console.WriteLine("Please put size of the board between 10-20: ");
 int BoardSize = int.Parse(Console.ReadLine());
-Console.WriteLine(BoardSize);
-PolishDraughts.Board board = new PolishDraughts.Board();
+Board board = new PolishDraughts.Board();
 board.Size = BoardSize;
-Console.WriteLine(board.Size);
 string[,] CreatedBoard = board.CreateBoard(board.Size);
-int count = 0;
+string[] DisplayBoard = board.DisplayBoard(board.Size);
+
 for (int row = 0; row<BoardSize; row++)
 {
-    for (int column = 0; column<BoardSize;column++)
+    for (int column = 0; column < BoardSize; column++)
     {
-        if (row%2==0) 
+        if (row % 2 == 0)
         {
-            if (column % 2 == 1)
+            if (BoardSize % 2 == 0)
             {
-                CreatedBoard[row, column] = "B";
+                DisplayBoard[row] = string.Concat(Enumerable.Repeat("*** --- ", (BoardSize / 2)));
+                DisplayBoard[row] += "\n";
+                DisplayBoard[row] += string.Concat(Enumerable.Repeat("* * - - ", (BoardSize / 2)));
+                DisplayBoard[row] += "\n";
+                DisplayBoard[row] += string.Concat(Enumerable.Repeat("*** --- ", (BoardSize / 2)));
             }
             else
             {
-                CreatedBoard[row, column] = "W";
+                DisplayBoard[row] = string.Concat(Enumerable.Repeat("*** --- ", (int)(BoardSize / 2)));
+                DisplayBoard[row] += "*** \n";
+                DisplayBoard[row] += string.Concat(Enumerable.Repeat("* * - - ", (int)(BoardSize / 2)));
+                DisplayBoard[row] += "* * \n";
+                DisplayBoard[row] += string.Concat(Enumerable.Repeat("*** --- ", (int)(BoardSize / 2)));
+                DisplayBoard[row] += "***";
             }
-        }
-        else
-        {
-            if (column%2 == 0)
+            if (row % 2 == 1)
             {
-                CreatedBoard[row, column] = "B";
+                if (BoardSize % 2 == 0)
+                {
+                    DisplayBoard[row] = string.Concat(Enumerable.Repeat("--- *** ", (BoardSize / 2)));
+                    DisplayBoard[row] += "\n";
+                    DisplayBoard[row] += string.Concat(Enumerable.Repeat("- - * * ", (BoardSize / 2)));
+                    DisplayBoard[row] += "\n";
+                    DisplayBoard[row] += string.Concat(Enumerable.Repeat("--- *** ", (BoardSize / 2)));
+                }
+                else
+                {
+                    DisplayBoard[row] = string.Concat(Enumerable.Repeat("--- *** ", (int)(BoardSize / 2)));
+                    DisplayBoard[row] += "--- \n";
+                    DisplayBoard[row] += string.Concat(Enumerable.Repeat("- - * * ", (int)(BoardSize / 2)));
+                    DisplayBoard[row] += "- - \n";
+                    DisplayBoard[row] += string.Concat(Enumerable.Repeat("--- * * ", (int)(BoardSize / 2)));
+                    DisplayBoard[row] += "---";
+                }
             }
-            else
-            {
-                CreatedBoard[row, column] = "W";
-            }
         }
-        if (count == board.Size-1)
-        {
-            Console.WriteLine(CreatedBoard[row, column]);
-            count = 0;
-        }
-        else
-        {
-            Console.Write(CreatedBoard[row, column] + " ");
-            count++;
-        }
-
     }
 }
 
+for (int row = 0; row < BoardSize; row++)
+{
+    Console.WriteLine(DisplayBoard[row]);
+}
