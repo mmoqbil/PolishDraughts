@@ -15,25 +15,66 @@ for (int row = 0; row<BoardSize; row++)
         {
             if (column % 2 == 1)
             {
-                CreatedBoard[row, column] = "B";
+                CreatedBoard[row, column] = "0";
             }
             else
             {
-                CreatedBoard[row, column] = "W";
+                CreatedBoard[row, column] = "1";
             }
         }
         else
         {
             if (column%2 == 0)
             {
-                CreatedBoard[row, column] = "B";
+                CreatedBoard[row, column] = "0";
             }
             else
+            {
+                CreatedBoard[row, column] = "1";
+            }
+        }
+
+    }
+}
+for (int row = 0; row<BoardSize; row++)
+{
+    for (int column = 0; column<BoardSize; column++)
+    {
+        if (row == 0)
+        {
+            if (column%2==1)
+            {
+                CreatedBoard[row, column] = "B";
+            }
+        }
+        if (row == 1)
+        {
+            if (column%2==0)
+            {
+                CreatedBoard[row, column] = "B";
+            }
+        }
+        if (row == BoardSize-2)
+        {
+            if(column%2==0)
             {
                 CreatedBoard[row, column] = "W";
             }
         }
-        if (count == board.Size-1)
+        if (row == BoardSize-1)
+        {
+            if(column%2==1)
+            {
+                CreatedBoard[row, column] = "W";
+            }
+        }
+    }
+}
+for (int row = 0; row < BoardSize; row++)
+{
+    for (int column = 0; column<BoardSize; column++)
+    {
+        if (count == board.Size - 1)
         {
             Console.WriteLine(CreatedBoard[row, column]);
             count = 0;
@@ -43,7 +84,6 @@ for (int row = 0; row<BoardSize; row++)
             Console.Write(CreatedBoard[row, column] + " ");
             count++;
         }
-
     }
 }
-
+board.ToString("A2");
