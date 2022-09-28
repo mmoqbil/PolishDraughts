@@ -2,6 +2,8 @@
 
 public class Board
 {
+    public Dictionary<string, (int,int)> stringPosition = new Dictionary<string, (int,int)>();
+    public string allAvailablePositions = "ABCDEFGHIJKLMNOPRST";
     private Pawn[,] _board;
     private int size;
 
@@ -34,6 +36,8 @@ public class Board
         _board = new Pawn[size, size];
         CreateBoard();
         Console.WriteLine(MakeStringBoard());
+        CreateAvailablePositions(size);
+        Console.WriteLine(ToString("A2"));
     }
 
     public void CreateBoard()
@@ -160,6 +164,21 @@ public class Board
             Console.WriteLine('-');
         }
         return "-";
+    }
+    public void CreateAvailablePositions(int size)
+    {
+        for (int row = 0; row < size; row++)
+        {
+            for (int column = 0; column < size; column++)
+            {
+                string firstLetter = allAvailablePositions[column].ToString();
+                stringPosition.Add(firstLetter + (row + 1).ToString(), (row, column));
+            }
+        }
+    }
+    public (int,int) ToString(string position)
+    {
+        return stringPosition[position];
     }
 }
 
