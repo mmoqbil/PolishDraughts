@@ -11,21 +11,19 @@ public class Board
         string[,] Board = new string[BoardSize, BoardSize];
         return Board;
     }
-    public (int,int) ToString(string position, int size)
+    public void CreateAvailablePositions(int size)
     {
-        for (int row = 0;row < size;row++)
+        for (int row = 0; row < size; row++)
         {
-            for (int column = 0;column<size;column++)
+            for (int column = 0; column < size; column++)
             {
                 string firstLetter = allAvailablePositions[column].ToString();
-                stringPosition.Add(firstLetter + (row+1).ToString(),(column,row));
+                stringPosition.Add(firstLetter + (row + 1).ToString(), (column, row));
             }
         }
-        foreach (KeyValuePair<string, (int, int)> entry in stringPosition)
-        {
-            Console.Write(entry.Key);
-            Console.Write(entry.Value);
-        }
+    }
+    public (int,int) ToString(string position)
+    {
         return stringPosition[position];
     }
 }
