@@ -13,7 +13,7 @@
 
         public Pawn(bool _isWhite, int row, int column)
         {
-            coordinates = (column, row);
+            coordinates = (row,column);
             isWhite = _isWhite;
         }
         public void MovePawn((int,int) pawnPosition)
