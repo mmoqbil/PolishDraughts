@@ -9,12 +9,16 @@
             set { isWhite = value; }
         }
 
-        public Tuple<int, int> coordinates { get; set; }
+        public (int,int) coordinates { get; set; }
 
         public Pawn(bool _isWhite, int row, int column)
         {
-            coordinates = Tuple.Create(row, column);
+            coordinates = (column, row);
             isWhite = _isWhite;
+        }
+        public void MovePawn((int,int) pawnPosition)
+        {
+            coordinates = pawnPosition;
         }
     }
 
