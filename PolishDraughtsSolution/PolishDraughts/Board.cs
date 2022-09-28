@@ -2,122 +2,164 @@
 
 public class Board
 {
-    public int Size { get; set; }
+    private Pawn[,] _board;
+    private int size;
 
-    public string[,] TwoDBoard(int BoardSize)
+    public Pawn[,] board
     {
-        string[,] Board = new string[BoardSize, BoardSize];
-        return Board;
+        get { return _board; }
     }
 
-    public string[] OneDBoard(int BoardSize)
+    public int Size
     {
-        string[] Board = new string[BoardSize];
-        return Board;
-    }
-
-    public string[] MakeStringsBoard(string[] OneDBoard, int BoardSize, string[,] BoardWithPawns)
-    {
-
-        for (int row = 0; row < BoardSize; row++)
+        get { return size; }
+        set
         {
-            for (int column = 0; column < BoardSize; column++)
+            if ((value >= 10) && (value <= 20))
             {
-                if (row % 2 == 0)
-                {
-                    if (BoardSize % 2 == 0)
-                    {
-                        OneDBoard[row] = string.Concat(Enumerable.Repeat("*** --- ", (BoardSize / 2)));
-                        OneDBoard[row] += "\n";
-                        OneDBoard[row] += string.Concat(Enumerable.Repeat($"*{BoardWithPawns[row, column]}* -{BoardWithPawns[row, column]}- ", (BoardSize / 2)));
-                        OneDBoard[row] += "\n";
-                        OneDBoard[row] += string.Concat(Enumerable.Repeat("*** --- ", (BoardSize / 2)));
-                    }
-                    else
-                    {
-                        OneDBoard[row] = string.Concat(Enumerable.Repeat("*** --- ", (int)(BoardSize / 2)));
-                        OneDBoard[row] += "*** \n";
-                        OneDBoard[row] += string.Concat(Enumerable.Repeat($"*{BoardWithPawns[row, column]}* -{BoardWithPawns[row, column]}- ", (int)(BoardSize / 2)));
-                        OneDBoard[row] += $"*{BoardWithPawns[row, column]}* \n";
-                        OneDBoard[row] += string.Concat(Enumerable.Repeat("*** --- ", (int)(BoardSize / 2)));
-                        OneDBoard[row] += "***";
-                    }
-                }
+                size = value;
+            }
+        }
+    }
 
-                if (row % 2 == 1)
+    public Board()
+    {
+        List<int> allowedSize = new List<int>() { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 };
+
+        while (!allowedSize.Contains(size))
+        {
+            Console.WriteLine("Please input the size of the board (10-20): ");
+            size = int.Parse(Console.ReadLine());
+        }
+        _board = new Pawn[size, size];
+        CreateBoard();
+        Console.WriteLine(MakeStringBoard());
+    }
+
+    public void CreateBoard()
+    {
+        for (int row = 0; row < size; row++)
+        {
+            for (int column = 0; column < size; column++)
+            {
+                List<int> allowedRows = new List<int>() { 0, 1, 2, 3, size - 1, size - 2, size - 3, size - 4 };
+                if (allowedRows.Contains(row))
                 {
-                    if (BoardSize % 2 == 0)
+                    if (row % 2 == 0)
                     {
-                        OneDBoard[row] = string.Concat(Enumerable.Repeat("--- *** ", (BoardSize / 2)));
-                        OneDBoard[row] += "\n";
-                        OneDBoard[row] += string.Concat(Enumerable.Repeat($"-{BoardWithPawns[row, column]}- *{BoardWithPawns[row, column]}* ", (BoardSize / 2)));
-                        OneDBoard[row] += "\n";
-                        OneDBoard[row] += string.Concat(Enumerable.Repeat("--- *** ", (BoardSize / 2)));
+                        if (column % 2 == 0)
+                        {
+                            if (row > size / 2)
+                                board[row, column] = new Pawn(true, row, column);
+                            else
+                                board[row, column] = new Pawn(false, row, column);
+                        }
+                        else
+                            board[row, column] = null;
                     }
                     else
                     {
-                        OneDBoard[row] = string.Concat(Enumerable.Repeat("--- *** ", (int)(BoardSize / 2)));
-                        OneDBoard[row] += "--- \n";
-                        OneDBoard[row] += string.Concat(Enumerable.Repeat($"-{BoardWithPawns[row, column]}- *{BoardWithPawns[row, column]}* ", (int)(BoardSize / 2)));
-                        OneDBoard[row] += $"-{BoardWithPawns[row, column]}- \n";
-                        OneDBoard[row] += string.Concat(Enumerable.Repeat("--- *** ", (int)(BoardSize / 2)));
-                        OneDBoard[row] += "---";
+                        if (column % 2 == 1)
+                        {
+                            if (row > size / 2)
+                                board[row, column] = new Pawn(true, row, column);
+                            else
+                                board[row, column] = new Pawn(false, row, column);
+                        }
+                        else
+                            board[row, column] = null;
                     }
+
                 }
             }
         }
-
-        return OneDBoard;
     }
-    public void ShowBoard(string[] DisplayBoard, int BoardSize)
+    public string MakeStringBoard()
     {
-        for (int row = 0; row < BoardSize; row++)
+        int n = ((size + 1) * 6 - 2);
+
+        for (int k = 0; k <= n; k++)
         {
-            Console.WriteLine(DisplayBoard[row]);
+            Console.Write('-');
         }
-        
-    }
+        Console.WriteLine("-");
 
-    public string[,] PutPawnsOnBoard(string[,] EmptyBoard,int BoardSize)
-    {
-        for (int row = 0; row < BoardSize; row++)
+        Console.Write("|    ");
+        for (int column = 0; column <= (size - 1); column++)
         {
-            for (int column = 0; column < BoardSize; column++)
+            Console.Write("|  " + (char)(column + 65) + "  ");
+        }
+        Console.WriteLine("|");
+
+        for (int k = 0; k <= n; k++)
+        {
+            Console.Write('-');
+        }
+        Console.WriteLine("-");
+
+        for (int row = 0; row <= (size - 1); row++)
+        {
+            for (int l = 0; l <= 2; l++)
             {
-                if (row == BoardSize - 1 )
-                { 
-                    if (column % 2 == 1)
-                    {                     
-                        EmptyBoard[row, column] = "W";                              
-                    }
-                }
-                else if (row == BoardSize - 2)
+                if (l % 2 == 1)
                 {
-                    if (column % 2 == 0)
+                    if (row <= 8)
                     {
-                        EmptyBoard[row, column] = "W";
+                        Console.Write("| " + (row + 1) + "  ");
                     }
-                }
-                else if (row == 0)
-                {
-                    if (column % 2 == 0)
+                    else
                     {
-                        EmptyBoard[row, column] = "B";
+                        Console.Write("| " + (row + 1) + " ");
                     }
-                }
-                else if (row == 1)
-                {
-                    if (column % 2 == 1)
+                    for (int column = 0; column <= (size - 1); column++)
                     {
-                        EmptyBoard[row, column] = "B";
+                        if (board[row, column] == null)
+                        {
+                            if ((row % 2 == 1 & column % 2 == 0) | (row % 2 == 0 & column % 2 == 1))
+                            {
+                                Console.Write("|*****");
+                            }
+                            else
+                            {
+                                Console.Write("|     ");
+                            }
+                        }
+                        else
+                        {
+                            if (board[row, column].IsWhite == false)
+                            {
+                                Console.Write("|  B  ");
+                            }
+                            else
+                            {
+                                Console.Write("|  W  ");
+                            }
+                        }
                     }
+                    Console.WriteLine("|");
                 }
                 else
                 {
-                    EmptyBoard[row, column] = " ";
+                    Console.Write("|    ");
+                    for (int column = 0; column <= (size - 1); column++) 
+                        if ((row % 2 == 1 & column % 2 == 0) | (row % 2 == 0 & column % 2 == 1))
+                        {
+                            Console.Write("|*****");
+                        }
+                        else
+                        {
+                            Console.Write("|     ");
+                        }
+                    Console.WriteLine("|");
                 }
             }
+            for (int k = 0; k <= n; k++)
+            {
+                Console.Write('-');
+            }
+            Console.WriteLine('-');
         }
-        return EmptyBoard;
+        return "-";
     }
 }
+
