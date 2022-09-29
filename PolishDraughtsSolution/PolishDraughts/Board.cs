@@ -236,6 +236,14 @@ public class Board
                         (int x, int y) availableMove = board[x, y].coordinates;
                         possibleMoves.Add(ToString(availableMove.x - 1, availableMove.y - 1));
                     }
+                    else
+                    {
+                        if (board[x - 1, y - 1].IsWhite == false && board[x - 2, y - 2] == null)
+                        {
+                            (int x, int y) availableMove = board[x, y].coordinates;
+                            possibleMoves.Add(ToString(availableMove.x - 2, availableMove.y - 2));
+                        }
+                    }
                 }
                 if (board[x, y].coordinates.x - 1 > 0 && board[x, y].coordinates.x + 1 < size
                                                       && board[x, y].coordinates.y < size)
@@ -244,6 +252,14 @@ public class Board
                     {
                         (int x, int y) availableMove = board[x, y].coordinates;
                         possibleMoves.Add(ToString(availableMove.x - 1, availableMove.y + 1));
+                    }
+                    else
+                    {
+                        if (board[x - 1, y + 1].IsWhite == false && board[x - 2, y + 2] == null)
+                        {
+                            (int x, int y) availableMove = board[x, y].coordinates;
+                            possibleMoves.Add(ToString(availableMove.x - 2, availableMove.y + 2));
+                        }
                     }
                 }
                 foreach (string move in possibleMoves)
@@ -278,6 +294,14 @@ public class Board
                         (int x, int y) availableMove = board[x, y].coordinates;
                         possibleMoves.Add(ToString(availableMove.x + 1, availableMove.y - 1));
                     }
+                    else
+                    {
+                        if (board[x + 1, y - 1].IsWhite == true && board[x + 2, y - 2] == null)
+                        {
+                            (int x, int y) availableMove = board[x, y].coordinates;
+                            possibleMoves.Add(ToString(availableMove.x + 2, availableMove.y - 2));
+                        }
+                    }
                 }
                 if (board[x, y].coordinates.x - 1 > 0 && board[x, y].coordinates.x + 1 < size
                                                       && board[x, y].coordinates.y < size)
@@ -286,6 +310,14 @@ public class Board
                     {
                         (int x, int y) availableMove = board[x, y].coordinates;
                         possibleMoves.Add(ToString(availableMove.x + 1, availableMove.y + 1));
+                    }
+                    else
+                    {
+                        if (board[x + 1, y + 1].IsWhite == false && board[x + 2, y + 2] == null)
+                        {
+                            (int x, int y) availableMove = board[x, y].coordinates;
+                            possibleMoves.Add(ToString(availableMove.x + 2, availableMove.y + 2));
+                        }
                     }
                 }
                 foreach (string move in possibleMoves)
