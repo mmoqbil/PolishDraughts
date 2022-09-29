@@ -352,6 +352,21 @@ public class Board
                 board[x, y].MovePawn(newPosition);
                 int new_x = newPosition.x;
                 int new_y = newPosition.y;
+                if (new_x - x == 2)
+                {
+                    if (new_y - y == 2)
+                    {
+                        Console.WriteLine("Pozycja do zbicia = " + (new_x - 1) + "," + (new_y - 1));
+                        board[new_x - 1, new_y - 1] = RemovePawn(board[new_x - 1, new_y - 1]);
+                        Console.ReadLine();
+                    }
+                    else if (y - new_y == 2)
+                    {
+                        Console.WriteLine("Pozycja do zbicia = " + (new_x - 1) + "," + (new_y + 1));
+                        board[new_x - 1, new_y + 1] = RemovePawn(board[new_x - 1, new_y + 1]);
+                        Console.ReadLine();
+                    }
+                }
                 board[new_x, new_y] = board[x, y];
                 board[x, y] = null;
                 Console.ReadLine();
