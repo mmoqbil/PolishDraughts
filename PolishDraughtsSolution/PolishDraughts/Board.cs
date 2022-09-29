@@ -4,7 +4,7 @@ namespace PolishDraughts;
 
 public class Board
 {
-    public Dictionary<string, (int x,int y)> stringPosition = new Dictionary<string, (int x,int y)>();
+    public Dictionary<string, (int x, int y)> stringPosition = new Dictionary<string, (int x, int y)>();
     public string allAvailablePositions = "ABCDEFGHIJKLMNOPRST";
     private Pawn[,] _board;
     private int size;
@@ -39,9 +39,24 @@ public class Board
         CreateBoard();
         Console.WriteLine(MakeStringBoard());
         CreateAvailablePositions(size);
-        CheckPawnByPosition();
-        CheckPawnByPosition();
-        CheckPawnByPosition();
+        string player = "White";
+        while (true)
+        {
+            if (player == "White")
+            {
+                CheckPawnByPosition(player);
+                Console.Clear();
+                MakeStringBoard();
+                player = "Black";
+            }
+            else
+            {
+                CheckPawnByPosition(player);
+                Console.Clear();
+                MakeStringBoard();
+                player = "White";
+            }
+        }
     }
 
     public void CreateBoard()
@@ -120,8 +135,8 @@ public class Board
                 {
                     Console.Write("| " + (char)(row + 65) + "  ");
 
-                        for (int column = 0; column <= (size - 1); column++)
-                        {       
+                    for (int column = 0; column <= (size - 1); column++)
+                    {
                         if (board[row, column] == null)
                         {
                             if ((row % 2 == 1 & column % 2 == 0) | (row % 2 == 0 & column % 2 == 1))
@@ -150,7 +165,7 @@ public class Board
                 else
                 {
                     Console.Write("|    ");
-                    for (int column = 0; column <= (size - 1); column++) 
+                    for (int column = 0; column <= (size - 1); column++)
                         if ((row % 2 == 1 & column % 2 == 0) | (row % 2 == 0 & column % 2 == 1))
                         {
                             Console.Write("|*****");
@@ -181,35 +196,34 @@ public class Board
             }
         }
     }
-    public (int x,int y) ToCoordinates(string position)
+    public (int x, int y) ToCoordinates(string position)
     {
         return stringPosition[position];
     }
     public string ToString(int x, int y)
     {
-        string result = allAvailablePositions[x].ToString() + (y+1).ToString();
+        string result = allAvailablePositions[x].ToString() + (y + 1).ToString();
         return result;
     }
-    public void CheckPawnByPosition()
+    public void CheckPawnByPosition(string player)
     {
-        Console.WriteLine("Write your position on board: ");
-        string yourPosition = Console.ReadLine();
+        Console.WriteLine($"{player}, choose pawn you want to move: ");
+        string yourPosition = Console.ReadLine().ToUpper();
         (int x, int y) position = ToCoordinates(yourPosition);
         int x = position.x;
         int y = position.y;
-        if(board[x,y] == null)
+        if (board[x, y] == null)
         {
             Console.WriteLine("This position is empty");
         }
         else
         {
-            
-            if (board[x, y].IsWhite == true)
+
+            if (board[x, y].IsWhite == true && player == "White")
             {
                 List<string> possibleMoves = new List<string>();
-                Console.WriteLine("There is a  White Pawn here, Where do you want to move it?");
                 Console.WriteLine("Possible moves: ");
-                if (board[x, y].coordinates.x - 1 > 0 && board[x, y].coordinates.x + 1 < size 
+                if (board[x, y].coordinates.x - 1 > 0 && board[x, y].coordinates.x + 1 < size
                                                       && board[x, y].coordinates.y > 0)
                 {
                     if (board[x - 1, y - 1] == null)
@@ -227,12 +241,12 @@ public class Board
                         possibleMoves.Add(ToString(availableMove.x - 1, availableMove.y + 1));
                     }
                 }
-                foreach(string move in possibleMoves)
+                foreach (string move in possibleMoves)
                 {
                     Console.Write(move + " ");
                 }
-                yourPosition = Console.ReadLine();
-                while(!possibleMoves.Contains(yourPosition))
+                yourPosition = Console.ReadLine().ToUpper();
+                while (!possibleMoves.Contains(yourPosition))
                 {
                     Console.WriteLine("Wrong move. Try another one");
                     yourPosition = Console.ReadLine();
@@ -241,28 +255,52 @@ public class Board
                 newPosition = (newPosition.x, newPosition.y);
                 board[x, y].MovePawn(newPosition);
                 int new_x = newPosition.x;
-                    int new_y = newPosition.y;
-                    board[new_x, new_y] = board[x, y];
-                    board[x, y] = null;
-                    MakeStringBoard();
-                
-            }
-            else
-            {
-                Console.WriteLine("There is a Black Pawn here");
-                Console.WriteLine("To tutaj");
-                Console.WriteLine(ToString(board[x, y].coordinates.Item1, board[x, y].coordinates.Item2));
-                Console.Write(board[x, y].coordinates.Item1 + "," + board[x, y].coordinates.Item2);
-                yourPosition = Console.ReadLine();
-                (int, int) newPosition = ToCoordinates(yourPosition);
-                board[x, y].MovePawn(newPosition);
-                int new_x = newPosition.Item1;
-                int new_y = newPosition.Item2;
+                int new_y = newPosition.y;
                 board[new_x, new_y] = board[x, y];
                 board[x, y] = null;
-                MakeStringBoard();
+
+
+            }
+            else if (board[x, y].IsWhite == false && player == "Black")
+            {
+                List<string> possibleMoves = new List<string>();
+                Console.WriteLine("Possible moves: ");
+                if (board[x, y].coordinates.x - 1 > 0 && board[x, y].coordinates.x + 1 < size
+                                                      && board[x, y].coordinates.y > 0)
+                {
+                    if (board[x + 1, y - 1] == null)
+                    {
+                        (int x, int y) availableMove = board[x, y].coordinates;
+                        possibleMoves.Add(ToString(availableMove.x + 1, availableMove.y - 1));
+                    }
+                }
+                if (board[x, y].coordinates.x - 1 > 0 && board[x, y].coordinates.x + 1 < size
+                                                      && board[x, y].coordinates.y < size)
+                {
+                    if (board[x + 1, y + 1] == null)
+                    {
+                        (int x, int y) availableMove = board[x, y].coordinates;
+                        possibleMoves.Add(ToString(availableMove.x + 1, availableMove.y + 1));
+                    }
+                }
+                foreach (string move in possibleMoves)
+                {
+                    Console.Write(move + " ");
+                }
+                yourPosition = Console.ReadLine().ToUpper();
+                while (!possibleMoves.Contains(yourPosition))
+                {
+                    Console.WriteLine("Wrong move. Try another one");
+                    yourPosition = Console.ReadLine();
+                }
+                (int x, int y) newPosition = ToCoordinates(yourPosition);
+                newPosition = (newPosition.x, newPosition.y);
+                board[x, y].MovePawn(newPosition);
+                int new_x = newPosition.x;
+                int new_y = newPosition.y;
+                board[new_x, new_y] = board[x, y];
+                board[x, y] = null;
             }
         }
     }
 }
-
