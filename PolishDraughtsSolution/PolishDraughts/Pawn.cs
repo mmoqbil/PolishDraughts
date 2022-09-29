@@ -9,7 +9,7 @@
             set { isWhite = value; }
         }
 
-        public (int,int) coordinates { get; set; }
+        public (int x,int y) coordinates { get; set; }
 
         public Pawn(bool _isWhite, int row, int column)
         {
