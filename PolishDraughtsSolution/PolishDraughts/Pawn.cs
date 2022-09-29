@@ -16,9 +16,5 @@
             coordinates = (row, column);
             isWhite = _isWhite;
         }
-        public void MovePawn((int, int) pawnPosition)
-        {
-            coordinates = pawnPosition;
-        }
     }
 }
