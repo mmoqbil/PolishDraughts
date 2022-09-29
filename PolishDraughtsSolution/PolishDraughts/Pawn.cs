@@ -3,7 +3,6 @@
     public class Pawn 
     {
         private bool isWhite;
-        private bool disposed = false;
         public bool IsWhite
         {
             get { return isWhite; }

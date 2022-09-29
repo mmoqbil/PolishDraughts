@@ -39,24 +39,6 @@ public class Board
         CreateBoard();
         Console.WriteLine(MakeStringBoard());
         CreateAvailablePositions(size);
-        string player = "White";
-        while (true)
-        {
-            if (player == "White")
-            {
-                CheckPawnByPosition(player);
-                Console.Clear();
-                MakeStringBoard();
-                player = "Black";
-            }
-            else
-            {
-                CheckPawnByPosition(player);
-                Console.Clear();
-                MakeStringBoard();
-                player = "White";
-            }
-        }
     }
 
     public void CreateBoard()
