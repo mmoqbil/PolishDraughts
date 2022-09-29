@@ -1,5 +1,6 @@
 ﻿using PolishDraughts;
+Game game = new Game();
+game.Start();
 
-Board board = new Board();
 
 

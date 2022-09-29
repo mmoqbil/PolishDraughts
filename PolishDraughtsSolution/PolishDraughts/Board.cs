@@ -1,8 +1,10 @@
-﻿namespace PolishDraughts;
+﻿using System.Data.Common;
+
+namespace PolishDraughts;
 
 public class Board
 {
-    public Dictionary<string, (int,int)> stringPosition = new Dictionary<string, (int,int)>();
+    public Dictionary<string, (int x, int y)> stringPosition = new Dictionary<string, (int x, int y)>();
     public string allAvailablePositions = "ABCDEFGHIJKLMNOPRST";
     private Pawn[,] _board;
     private int size;
@@ -37,7 +39,6 @@ public class Board
         CreateBoard();
         Console.WriteLine(MakeStringBoard());
         CreateAvailablePositions(size);
-        Console.WriteLine(ToString("A2"));
     }
 
     public void CreateBoard()
@@ -91,7 +92,14 @@ public class Board
         Console.Write("|    ");
         for (int column = 0; column <= (size - 1); column++)
         {
-            Console.Write("|  " + (char)(column + 65) + "  ");
+            if (column <= 8)
+            {
+                Console.Write("|  " + (column + 1) + "  ");
+            }
+            else
+            {
+                Console.Write("|  " + (column + 1) + " ");
+            }
         }
         Console.WriteLine("|");
 
@@ -107,14 +115,8 @@ public class Board
             {
                 if (l % 2 == 1)
                 {
-                    if (row <= 8)
-                    {
-                        Console.Write("| " + (row + 1) + "  ");
-                    }
-                    else
-                    {
-                        Console.Write("| " + (row + 1) + " ");
-                    }
+                    Console.Write("| " + (char)(row + 65) + "  ");
+
                     for (int column = 0; column <= (size - 1); column++)
                     {
                         if (board[row, column] == null)
@@ -145,7 +147,7 @@ public class Board
                 else
                 {
                     Console.Write("|    ");
-                    for (int column = 0; column <= (size - 1); column++) 
+                    for (int column = 0; column <= (size - 1); column++)
                         if ((row % 2 == 1 & column % 2 == 0) | (row % 2 == 0 & column % 2 == 1))
                         {
                             Console.Write("|*****");
@@ -171,14 +173,28 @@ public class Board
         {
             for (int column = 0; column < size; column++)
             {
-                string firstLetter = allAvailablePositions[column].ToString();
-                stringPosition.Add(firstLetter + (row + 1).ToString(), (row, column));
+                string firstLetter = allAvailablePositions[row].ToString();
+                stringPosition.Add(firstLetter + (column + 1).ToString(), (row, column));
             }
         }
     }
-    public (int,int) ToString(string position)
+    public (int x, int y) ToCoordinates(string position)
     {
         return stringPosition[position];
     }
+    public string ToString(int x, int y)
+    {
+        string result = allAvailablePositions[x].ToString() + (y + 1).ToString();
+        return result;
+    }
+    public Pawn RemovePawn(Pawn pawn)
+    {
+        pawn = null;
+        return pawn;
+    }
+    public Pawn MovePawn((int, int) pawnPosition, Pawn pawn)
+    {
+        pawn.coordinates = pawnPosition;
+        return pawn;
+    }
 }
-
