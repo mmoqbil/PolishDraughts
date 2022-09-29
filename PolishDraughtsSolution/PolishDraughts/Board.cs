@@ -368,7 +368,7 @@ public class Board
                     }
                 }
                 board[new_x, new_y] = board[x, y];
-                board[x, y] = null;
+                board[x, y] = RemovePawn(board[x, y]);
                 Console.ReadLine();
             }
         }
