@@ -205,6 +205,11 @@ public class Board
         string result = allAvailablePositions[x].ToString() + (y + 1).ToString();
         return result;
     }
+    public Pawn RemovePawn(Pawn pawn)
+    {
+        pawn = null;
+        return pawn;
+    }
     public void CheckPawnByPosition(string player)
     {
         Console.WriteLine($"{player}, choose pawn you want to move: ");
@@ -257,7 +262,7 @@ public class Board
                 int new_x = newPosition.x;
                 int new_y = newPosition.y;
                 board[new_x, new_y] = board[x, y];
-                board[x, y] = null;
+                board[x,y] = RemovePawn(board[x,y]);
 
 
             }
