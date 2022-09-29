@@ -277,6 +277,21 @@ public class Board
                 board[x, y].MovePawn(newPosition);
                 int new_x = newPosition.x;
                 int new_y = newPosition.y;
+                if (x - new_x == 2)
+                {
+                    if (new_y - y == 2)
+                    {
+                        Console.WriteLine("Pozycja do zbicia = " + (new_x + 1) + "," + (new_y - 1));
+                        board[new_x + 1, new_y - 1] = RemovePawn(board[new_x + 1, new_y - 1]);
+                        Console.ReadLine();
+                    }
+                    else if(y - new_y == 2)
+                    {
+                        Console.WriteLine("Pozycja do zbicia = " + (new_x + 1) + "," + (new_y + 1));
+                        board[new_x + 1, new_y + 1] = RemovePawn(board[new_x + 1, new_y + 1]);
+                        Console.ReadLine();
+                    }
+                }
                 board[new_x, new_y] = board[x, y];
                 board[x,y] = RemovePawn(board[x,y]);
 
@@ -313,7 +328,7 @@ public class Board
                     }
                     else
                     {
-                        if (board[x + 1, y + 1].IsWhite == false && board[x + 2, y + 2] == null)
+                        if (board[x + 1, y + 1].IsWhite == true && board[x + 2, y + 2] == null)
                         {
                             (int x, int y) availableMove = board[x, y].coordinates;
                             possibleMoves.Add(ToString(availableMove.x + 2, availableMove.y + 2));
@@ -332,11 +347,14 @@ public class Board
                 }
                 (int x, int y) newPosition = ToCoordinates(yourPosition);
                 newPosition = (newPosition.x, newPosition.y);
+                Console.WriteLine(board[x, y].coordinates.x + "," + board[x, y].coordinates.y);
+                Console.WriteLine(newPosition);
                 board[x, y].MovePawn(newPosition);
                 int new_x = newPosition.x;
                 int new_y = newPosition.y;
                 board[new_x, new_y] = board[x, y];
                 board[x, y] = null;
+                Console.ReadLine();
             }
         }
     }
