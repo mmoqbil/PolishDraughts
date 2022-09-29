@@ -1,4 +1,6 @@
-﻿namespace PolishDraughts;
+﻿using System.Data.Common;
+
+namespace PolishDraughts;
 
 public class Board
 {
@@ -37,8 +39,6 @@ public class Board
         CreateBoard();
         Console.WriteLine(MakeStringBoard());
         CreateAvailablePositions(size);
-        Console.WriteLine(ToString(0, 2));
-        Console.WriteLine(ToCoordinates("B6"));
         CheckPawnByPosition();
         CheckPawnByPosition();
         CheckPawnByPosition();
@@ -95,7 +95,14 @@ public class Board
         Console.Write("|    ");
         for (int column = 0; column <= (size - 1); column++)
         {
-            Console.Write("|  " + (char)(column + 65) + "  ");
+            if (column <= 8)
+            {
+                Console.Write("|  " + (column + 1) + "  ");
+            }
+            else
+            {
+                Console.Write("|  " + (column + 1) + " ");
+            }
         }
         Console.WriteLine("|");
 
@@ -111,16 +118,10 @@ public class Board
             {
                 if (l % 2 == 1)
                 {
-                    if (row <= 8)
-                    {
-                        Console.Write("| " + (row + 1) + "  ");
-                    }
-                    else
-                    {
-                        Console.Write("| " + (row + 1) + " ");
-                    }
-                    for (int column = 0; column <= (size - 1); column++)
-                    {
+                    Console.Write("| " + (char)(row + 65) + "  ");
+
+                        for (int column = 0; column <= (size - 1); column++)
+                        {       
                         if (board[row, column] == null)
                         {
                             if ((row % 2 == 1 & column % 2 == 0) | (row % 2 == 0 & column % 2 == 1))
@@ -199,55 +200,61 @@ public class Board
         int y = position.Item2;
         Console.WriteLine(x);
         Console.WriteLine(y);
-        if(board[y,x] == null)
+        if(board[x,y] == null)
         {
             Console.WriteLine("This position is empty");
         }
         else
         {
             
-            if (board[y, x].IsWhite == true)
+            if (board[x, y].IsWhite == true)
             {
                 List<string> possibleMoves = new List<string>();
                 Console.WriteLine("There is a  White Pawn here, Where do you want to move it?");
                 Console.WriteLine("To tutaj");
                 Console.WriteLine(ToString(board[x, y].coordinates.Item1, board[x, y].coordinates.Item2));
                 Console.WriteLine("Possible moves: ");
-                if (board[y, x].coordinates.Item1 - 1 > 0 && board[y,x].coordinates.Item1 + 1 < size
-                    && board[y,x].coordinates.Item2 - 1 > 0)
+                if (board[x, y].coordinates.Item1 - 1 > 0 && board[x, y].coordinates.Item1 + 1 < size 
+                                                          && board[x, y].coordinates.Item2 - 1 > 0)
                 {
-                    if (board[y - 1, x - 1] == null)
+                    if (board[x - 1, y - 1] == null)
                     {
                         (int x, int y) availableMove = board[x, y].coordinates;
-                        Console.WriteLine(ToString(availableMove.x, availableMove.y-1));
+                        Console.WriteLine(ToString(availableMove.x - 1, availableMove.y - 1));
                         Console.Write(availableMove.x + "," + availableMove.y);
-                        possibleMoves.Add(ToString(availableMove.x - 1, availableMove.y-1));
+                        possibleMoves.Add(ToString(availableMove.x - 1, availableMove.y - 1));
                     }
-
-                    if (board[y - 1, x + 1] == null)
-                    {
-                        (int x, int y) availableMove = board[x, y].coordinates;
-                        Console.WriteLine(ToString(availableMove.x, availableMove.y-1));
-                        Console.Write(availableMove.x + "," + availableMove.y);
-                        possibleMoves.Add(ToString(availableMove.x + 1, availableMove.y-1));
-                    }
-                    Console.WriteLine("To tutaj");
-                    Console.WriteLine(ToString(board[x,y].coordinates.Item1,board[x,y].coordinates.Item2));
                 }
-                    foreach(string move in possibleMoves)
+
+                if (board[x, y].coordinates.Item1 - 1 > 0 && board[x, y].coordinates.Item1 + 1 < size
+                                                          && board[x, y].coordinates.Item2 + 1 > 0)
+                {
+                    if (board[x - 1, y + 1] == null)
+                    {
+                        (int x, int y) availableMove = board[x, y].coordinates;
+                        Console.WriteLine(ToString(availableMove.x - 1, availableMove.y + 1));
+                        Console.Write(availableMove.x + "," + availableMove.y);
+                        possibleMoves.Add(ToString(availableMove.x - 1, availableMove.y + 1));
+                    }
+                }
+
+                Console.WriteLine("To tutaj");
+                Console.WriteLine(ToString(board[x,y].coordinates.Item1,board[x,y].coordinates.Item2));
+                
+                foreach(string move in possibleMoves)
                 {
                     Console.Write(move + " ");
                 }
-                    Console.WriteLine(board[x, y].coordinates);
-                    yourPosition = Console.ReadLine();
-                    while(!possibleMoves.Contains(yourPosition))
+                Console.WriteLine(board[x, y].coordinates);
+                yourPosition = Console.ReadLine();
+                while(!possibleMoves.Contains(yourPosition))
                 {
                     Console.WriteLine("Wrong move. Try another one");
                     yourPosition = Console.ReadLine();
                 }
                 (int x, int y) newPosition = ToCoordinates(yourPosition);
                     Console.WriteLine(newPosition);
-                newPosition = (newPosition.y, newPosition.x);
+                newPosition = (newPosition.x, newPosition.y);
                 Console.WriteLine(newPosition);
                 Console.WriteLine(board[x, y].coordinates);
                 Console.WriteLine(ToString(newPosition.x,newPosition.y));
@@ -255,12 +262,11 @@ public class Board
                 Console.WriteLine(board[x, y].coordinates);
                     int new_x = newPosition.x;
                     int new_y = newPosition.y;
-                    board[new_x, new_y] = board[y, x];
-                Console.WriteLine("NOWA POZYCJA (B6 - (1,5)");
-                Console.Write(newPosition.x);
+                    board[new_x, new_y] = board[x, y];
+                    Console.Write(newPosition.x);
                 Console.Write(newPosition.y);
                 Console.WriteLine(board[new_x, new_y].coordinates);
-                    board[y, x] = null;
+                    board[x, y] = null;
                     MakeStringBoard();
                 
             }
