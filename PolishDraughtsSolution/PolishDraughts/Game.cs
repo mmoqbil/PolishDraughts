@@ -65,7 +65,7 @@
                         }
                     }
                     if (board.board[x, y].coordinates.x - 1 > 0 && board.board[x, y].coordinates.x + 1 < board.Size
-                                                          && board.board[x, y].coordinates.y < board.Size)
+                                                          && board.board[x, y].coordinates.y + 1 < board.Size)
                     {
                         if (board.board[x - 1, y + 1] == null)
                         {
@@ -138,7 +138,7 @@
                         }
                     }
                     if (board.board[x, y].coordinates.x - 1 > 0 && board.board[x, y].coordinates.x + 1 < board.Size
-                                                          && board.board[x, y].coordinates.y < board.Size)
+                                                          && board.board[x, y].coordinates.y + 1 < board.Size)
                     {
                         if (board.board[x + 1, y + 1] == null)
                         {
